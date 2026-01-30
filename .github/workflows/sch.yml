@@ -26,7 +26,7 @@ jobs:
           Expand-Archive -Path "$env:TEMP\scoop.zip" -DestinationPath $env:TEMP -Force
           
           # Ejecutar checkver con autoupdate para cada manifest
-          Get-ChildItem -Path "buckets/*.json" | ForEach-Object {
+          Get-ChildItem -Path "bucket/*.json" | ForEach-Object {
             Write-Host "Checking $($_.Name)..." -ForegroundColor Cyan
             & "$scoopRepo\bin\checkver.ps1" -App $_.FullName -Dir "buckets" -Update
           }
