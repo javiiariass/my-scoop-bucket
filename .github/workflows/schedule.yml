@@ -21,7 +21,6 @@ jobs:
         run: |
           Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
           irm get.scoop.sh | iex
-          scoop install git
 
       - name: Ejecutar Checkver (Actualizar JSON)
         run: |
@@ -29,7 +28,7 @@ jobs:
           $checkver = "$env:USERPROFILE\scoop\apps\scoop\current\bin\checkver.ps1"
           
           # Buscamos todos los archivos .json en este repo y les pasamos el checkver update
-          Get-ChildItem *.json | ForEach-Object {
+          Get-ChildItem bucket/*.json | ForEach-Object {
               Write-Host "Comprobando $($_.Name)..."
               & $checkver -u -App $_.FullName
           }
@@ -41,7 +40,7 @@ jobs:
           
           # Si hay cambios en los json, los subimos
           if (git status --porcelain) {
-              git add *.json
+              git add bucket/*.json
               git commit -m "Auto-update: versiones actualizadas por Scoop"
               git push
           } else {
