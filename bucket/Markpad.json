@@ -1,38 +1,48 @@
 {
-  "version": "2.3.5",
-  "description": "A fast, simple markdown editor (Tauri-based)",
-  "homepage": "https://github.com/alecdotdev/Markpad",
-  "license": "BSD-3-Clause",
-  "checkver": {
-    "url": "https://github.com/alecdotdev/Markpad/releases/latest",
-    "regex": "Markpad v([\\d.]+)"
-  },
-  "architecture": {
-    "64bit": {
-      "url": "https://github.com/alecdotdev/Markpad/releases/download/v2.3.5/Markpad-x64.exe",
-      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
-      "bin": [["Markpad-x64.exe", "Markpad"]]
+    "version": "2.3.6",
+    "description": "A fast, simple markdown editor (Tauri-based)",
+    "homepage": "https://github.com/alecdotdev/Markpad",
+    "license": "BSD-3-Clause",
+    "checkver": {
+        "url": "https://github.com/alecdotdev/Markpad/releases/latest",
+        "regex": "Markpad v([\\d.]+)"
     },
-    "arm64": {
-      "url": "https://github.com/alecdotdev/Markpad/releases/download/v2.3.5/Markpad-arm64.exe",
-      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
-      "bin": [["Markpad-arm64.exe", "Markpad"]]
-    }
-  },
-  "autoupdate": {
     "architecture": {
-      "64bit": {
-        "url": "https://github.com/alecdotdev/Markpad/releases/download/v$version/Markpad-x64.exe",
-        "hash": {
-            "url": "$url" 
+        "64bit": {
+            "url": "https://github.com/alecdotdev/Markpad/releases/download/v2.3.6/Markpad-x64.exe",
+            "hash": "fe4085ac65f092d4c01b495e7b858a4d4c61ee46c914e8f2205769677eda3d80",
+            "bin": [
+                [
+                    "Markpad-x64.exe",
+                    "Markpad"
+                ]
+            ]
+        },
+        "arm64": {
+            "url": "https://github.com/alecdotdev/Markpad/releases/download/v2.3.6/Markpad-arm64.exe",
+            "hash": "0dfbe9e6b75df135be2f232d73db33d52dc7628b5379070ec1f6927dffaa27e3",
+            "bin": [
+                [
+                    "Markpad-arm64.exe",
+                    "Markpad"
+                ]
+            ]
         }
-      },
-      "arm64": {
-        "url": "https://github.com/alecdotdev/Markpad/releases/download/v$version/Markpad-arm64.exe",
-        "hash": {
-            "url": "$url" 
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/alecdotdev/Markpad/releases/download/v$version/Markpad-x64.exe",
+                "hash": {
+                    "url": "$url"
+                }
+            },
+            "arm64": {
+                "url": "https://github.com/alecdotdev/Markpad/releases/download/v$version/Markpad-arm64.exe",
+                "hash": {
+                    "url": "$url"
+                }
+            }
         }
-      }
     }
-  }
 }
