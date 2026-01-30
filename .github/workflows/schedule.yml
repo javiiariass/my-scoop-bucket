@@ -1,0 +1,49 @@
+name: Actualizador Scoop
+
+on:
+  schedule:
+    # Se ejecuta cada dia
+    - cron: '10 0 * * *'
+  # Permite ejecutarlo manualmente desde la pestaña Actions
+  workflow_dispatch:
+
+jobs:
+  update-manifests:
+    runs-on: windows-latest
+    permissions:
+      contents: write  # IMPORTANTE: Permiso para guardar los cambios
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Instalar Scoop y utilidades
+        run: |
+          Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+          irm get.scoop.sh | iex
+          scoop install git
+
+      - name: Ejecutar Checkver (Actualizar JSON)
+        run: |
+          # Localizamos el script checkver dentro de la instalación de Scoop
+          $checkver = "$env:USERPROFILE\scoop\apps\scoop\current\bin\checkver.ps1"
+          
+          # Buscamos todos los archivos .json en este repo y les pasamos el checkver update
+          Get-ChildItem *.json | ForEach-Object {
+              Write-Host "Comprobando $($_.Name)..."
+              & $checkver -u -App $_.FullName
+          }
+
+      - name: Guardar cambios (Commit & Push)
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action Bot"
+          
+          # Si hay cambios en los json, los subimos
+          if (git status --porcelain) {
+              git add *.json
+              git commit -m "Auto-update: versiones actualizadas por Scoop"
+              git push
+          } else {
+              Write-Host "No hay actualizaciones nuevas."
+          }
