@@ -1,0 +1,47 @@
+name: Auto Update Manifests
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # Cada día a las 6:00 UTC
+  workflow_dispatch:  # Permite ejecución manual
+
+jobs:
+  update:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Scoop
+        shell: pwsh
+        run: |
+          Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+          irm get.scoop.sh | iex
+
+      - name: Check and Update Manifests
+        shell: pwsh
+        run: |
+          # Descargar scripts de Scoop
+          $scoopRepo = "$env:TEMP\scoop-main"
+          Invoke-WebRequest -Uri "https://github.com/ScoopInstaller/Scoop/archive/refs/heads/master.zip" -OutFile "$env:TEMP\scoop.zip"
+          Expand-Archive -Path "$env:TEMP\scoop.zip" -DestinationPath $env:TEMP -Force
+          
+          # Ejecutar checkver con autoupdate para cada manifest
+          Get-ChildItem -Path "buckets/*.json" | ForEach-Object {
+            Write-Host "Checking $($_.Name)..." -ForegroundColor Cyan
+            & "$scoopRepo\bin\checkver.ps1" -App $_.FullName -Dir "buckets" -Update
+          }
+
+      - name: Commit Changes
+        shell: pwsh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add buckets/*.json
+          $changes = git diff --cached --name-only
+          if ($changes) {
+            $date = Get-Date -Format "yyyy-MM-dd"
+            git commit -m "Auto-update manifests ($date)"
+            git push
+          } else {
+            Write-Host "No updates found" -ForegroundColor Yellow
+          }
