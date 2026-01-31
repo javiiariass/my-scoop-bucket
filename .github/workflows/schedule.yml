@@ -3,7 +3,7 @@ name: Actualizador Scoop
 on:
   schedule:
     # Se ejecuta cada dia
-    - cron: '24 0 * * *'
+    - cron: '0 8 * * *'
   # Permite ejecutarlo manualmente desde la pestaña Actions
   workflow_dispatch:
 
