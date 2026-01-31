@@ -16,7 +16,8 @@
                     "Markpad-x64.exe",
                     "Markpad"
                 ]
-            ]
+            ],
+            "shortcuts": [["Markpad-x64.exe", "Markpad"]]
         },
         "arm64": {
             "url": "https://github.com/alecdotdev/Markpad/releases/download/v2.3.6/Markpad-arm64.exe",
@@ -26,9 +27,17 @@
                     "Markpad-arm64.exe",
                     "Markpad"
                 ]
-            ]
+            ],
+            "shortcuts": [["Markpad-arm64.exe", "Markpad"]]
         }
     },
+    "file_associations": [
+        {
+            "extension": ".md",
+            "command": "Markpad",
+            "description": "Markdown Document"
+        }
+    ],
     "autoupdate": {
         "architecture": {
             "64bit": {
