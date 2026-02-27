@@ -1,5 +1,5 @@
 {
-    "version": "2.4.4",
+    "version": "2.4.5",
     "description": "A fast, simple markdown editor (Tauri-based)",
     "homepage": "https://github.com/alecdotdev/Markpad",
     "license": "BSD-3-Clause",
@@ -9,8 +9,8 @@
     },
     "architecture": {
         "64bit": {
-            "url": "https://github.com/alecdotdev/Markpad/releases/download/v2.4.4/Markpad-x64.exe",
-            "hash": "8992f52c498a242460ccc7042ecd4c69187fdb0b971677ddb16435b234b5338a",
+            "url": "https://github.com/alecdotdev/Markpad/releases/download/v2.4.5/Markpad-x64.exe",
+            "hash": "894a0e5f94ab9ee1dcbe9866488e4a33efcee37d228128a5060dd44faca4f953",
             "bin": [
                 [
                     "Markpad-x64.exe",
@@ -25,8 +25,8 @@
             ]
         },
         "arm64": {
-            "url": "https://github.com/alecdotdev/Markpad/releases/download/v2.4.4/Markpad-arm64.exe",
-            "hash": "b26efe3b824c1ecfee22790f8bc7fa4968edb40849301e6bde966348be4578da",
+            "url": "https://github.com/alecdotdev/Markpad/releases/download/v2.4.5/Markpad-arm64.exe",
+            "hash": "2f7592512f6baa6752a22eb79daaefa6daf67f84d31058b964088f53f112f299",
             "bin": [
                 [
                     "Markpad-arm64.exe",
